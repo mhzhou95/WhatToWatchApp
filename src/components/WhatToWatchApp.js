@@ -7,7 +7,6 @@ import MovieGenres from './MovieGenres';
 import TvGenres from './TvGenres';
 import $ from 'jquery';
 
-const auth = require("../../auth");
 
 class WhatToWatchApp extends React.Component {
   state = {
@@ -26,13 +25,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/discover/movie?api_key=" + auth.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true" 
+      url: "https://api.themoviedb.org/3/discover/movie?api_key=" + process.env.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true" 
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/discover/movie?api_key=" + auth.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true&page=" 
+          url: "https://api.themoviedb.org/3/discover/movie?api_key=" + process.env.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true&page=" 
         }))
       }
     })
@@ -44,13 +43,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + auth.TMDB_API_KEY 
+      url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + process.env.TMDB_API_KEY 
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + auth.TMDB_API_KEY  + "&page=" 
+          url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + process.env.TMDB_API_KEY  + "&page=" 
         }))
       }
     })
@@ -62,13 +61,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/search/multi?api_key=" + auth.TMDB_API_KEY +  "&query=" + title
+      url: "https://api.themoviedb.org/3/search/multi?api_key=" + process.env.TMDB_API_KEY +  "&query=" + title
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/search/multi?api_key=" + auth.TMDB_API_KEY +  "&query=" + title + "&page=" 
+          url: "https://api.themoviedb.org/3/search/multi?api_key=" + process.env.TMDB_API_KEY +  "&query=" + title + "&page=" 
         }))
       }
     })
@@ -80,13 +79,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + auth.TMDB_API_KEY  + "&"
+      url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + process.env.TMDB_API_KEY  + "&"
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + auth.TMDB_API_KEY  + "&page=" 
+          url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + process.env.TMDB_API_KEY  + "&page=" 
         }))
       }
     })
@@ -98,13 +97,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/tv/popular?api_key=" + auth.TMDB_API_KEY + ""
+      url: "https://api.themoviedb.org/3/tv/popular?api_key=" + process.env.TMDB_API_KEY + ""
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/tv/popular?api_key=" + auth.TMDB_API_KEY +  "&page=" 
+          url: "https://api.themoviedb.org/3/tv/popular?api_key=" + process.env.TMDB_API_KEY +  "&page=" 
         }))
       }
     })
@@ -167,13 +166,13 @@ class WhatToWatchApp extends React.Component {
       genre: genreMovie
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/discover/movie?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie
+      url: "https://api.themoviedb.org/3/discover/movie?api_key="+ process.env.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/discover/movie?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie + "&page=" 
+          url: "https://api.themoviedb.org/3/discover/movie?api_key="+ process.env.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie + "&page=" 
         }))
       }
     })
@@ -193,13 +192,13 @@ class WhatToWatchApp extends React.Component {
       genre: genreTv
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/discover/tv?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv
+      url: "https://api.themoviedb.org/3/discover/tv?api_key="+ process.env.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/discover/tv?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv + "&page=" 
+          url: "https://api.themoviedb.org/3/discover/tv?api_key="+ process.env.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv + "&page=" 
         }))
       }
     })
