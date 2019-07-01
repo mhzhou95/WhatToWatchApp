@@ -26,9 +26,7 @@ class WhatToWatchApp extends React.Component {
       url: "https://api.themoviedb.org/3/discover/movie?api_key=" + auth.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true" 
       ,
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
           url: "https://api.themoviedb.org/3/discover/movie?api_key=" + auth.TMDB_API_KEY + "&sort_by=vote_count.desc&include_adult=true&page=" 
@@ -47,9 +45,7 @@ class WhatToWatchApp extends React.Component {
       url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + auth.TMDB_API_KEY 
       ,
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
           url: "https://api.themoviedb.org/3/trending/all/week?api_key=" + auth.TMDB_API_KEY  + "&page=" 
@@ -68,9 +64,7 @@ class WhatToWatchApp extends React.Component {
       url: "https://api.themoviedb.org/3/search/multi?api_key=" + auth.TMDB_API_KEY +  "&query=" + title
       ,
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
           url: "https://api.themoviedb.org/3/search/multi?api_key=" + auth.TMDB_API_KEY +  "&query=" + title + "&page=" 
@@ -89,9 +83,7 @@ class WhatToWatchApp extends React.Component {
       url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + auth.TMDB_API_KEY  + "&"
       ,
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
           url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + auth.TMDB_API_KEY  + "&page=" 
@@ -110,9 +102,7 @@ class WhatToWatchApp extends React.Component {
       url: "https://api.themoviedb.org/3/tv/popular?api_key=" + auth.TMDB_API_KEY + ""
       ,
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
           url: "https://api.themoviedb.org/3/tv/popular?api_key=" + auth.TMDB_API_KEY +  "&page=" 
@@ -130,9 +120,7 @@ class WhatToWatchApp extends React.Component {
     $.ajax({
       url: this.state.url + (this.state.page + 1),
       success: (searchResults) => {
-        console.log('search')
         const results = searchResults.results
-        console.log(searchResults);
         this.setState(()=>({
           movies: this.state.movies.concat(results),
         }))
@@ -150,9 +138,7 @@ class WhatToWatchApp extends React.Component {
       $.ajax({
         url: this.state.url + (this.state.page - 1),
         success: (searchResults) => {
-          console.log('search')
           const results = searchResults.results
-          console.log(searchResults);
           this.setState(()=>({
             movies: this.state.movies.concat(results),
           }))

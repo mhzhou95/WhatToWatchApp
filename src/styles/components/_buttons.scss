@@ -1,29 +1,49 @@
 .button-default{
   background-color: #943156;
+  border: none;
+  border-bottom: .5rem solid darken(#943156, 11%);
   font-family: Comic Sans MS;
-  margin: 1rem 0 1rem 0;
+  margin: 1rem .5rem 1rem .5rem;
+  padding: .5rem;
+  color: white;
 }
 
 .search-button{
   font-family: cursive;
   background-color: #699A33;
+  border:none;
+  border-bottom: .5rem solid darken(#699A33, 11%);
+  color: whitesmoke;
+  font-size: $medium-size;
+  padding: $small-size;
 }
 
 .random-button{
   font-family: cursive;
   margin: 1rem;
   background-color: #699A33;
+  border:none;
+  border-bottom: .5rem solid darken(#699A33, 11%);
   padding: 1rem;  
+  color:whitesmoke;
 }
 
 .button-modal{
   background-color: #943156;
   font-family: Comic Sans MS;
-  margin-bottom :1rem;
+  margin-bottom: 1rem;
+  border:none;
+  border-bottom: .5rem solid darken(#943156, 11%);
+  color:white;
+  padding: $small-size;
 }
 
 .view-button{
   font-family: cursive;
   background-color: #699A33;
-  margin: 5px;
+  border:none;
+  border-bottom: .5rem solid darken(#699A33, 11%);
+  margin-top: 7px;
+  color:white;
+  padding: .8rem;
 }

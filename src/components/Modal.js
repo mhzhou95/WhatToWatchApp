@@ -16,11 +16,15 @@ class RandomShow extends React.Component{
   }
   handleOpenModal = () => {
     const randomNumber = Math.floor(Math.random() * Math.floor(this.state.movies.length))
-    this.setState(()=> ({
-      showModal: true,
-      movie: this.state.movies[randomNumber]
-    }))
-  }  
+      if(this.state.movies[randomNumber].vote_average>0){
+        this.setState(()=> ({
+          showModal: true,
+          movie: this.state.movies[randomNumber]
+        }))
+      }else{
+        this.handleOpenModal();
+      }  
+  }
   handleCloseModal = () => {
     this.setState(()=> ({
       showModal: false
@@ -44,8 +48,8 @@ class RandomShow extends React.Component{
             voteAverage= {this.state.movie.vote_average}
             releaseDate={this.state.movie.release_date}
             overview= {this.state.movie.overview}
-            
-          />
+            />
+          <button className="random-button" onClick={this.handleOpenModal}>Random</button>
           <button className="button-modal" onClick={this.handleCloseModal}>Close</button>
        </Modal>
       </div>

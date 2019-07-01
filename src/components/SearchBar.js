@@ -13,7 +13,7 @@ export default class SearchBar extends React.Component{
     return (
      <div>
         <form onSubmit= {this.handleSearch}>
-          <input type="text" name="title"/> 
+          <input className ="search-input" type="text" name="title"/> 
           <button className="search-button">Search</button>
         </form>
      </div>
