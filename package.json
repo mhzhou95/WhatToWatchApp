@@ -1,8 +1,8 @@
 {
-  "name": "boiler-plate",
+  "name": "what-to-watch",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Andrew Mead",
+  "author": "Minghao Zhou",
   "license": "MIT",
   "scripts": {
     "serve": "live-server public/",

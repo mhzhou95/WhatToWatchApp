@@ -13,7 +13,9 @@ class Movie extends React.Component{
   }
   render = () =>{
     return (
-      <div className="movie">
+      <div>
+      {this.props.voteAverage>0 && 
+        <div className="movie">
         <img src= {"http://image.tmdb.org/t/p/w185/" + this.props.posterPath} alt="Poster" className="poster"/>
         <div>
           {this.props.title&& <h2 className = "title">{this.props.title}</h2>}
@@ -25,6 +27,7 @@ class Movie extends React.Component{
           <p className="summary">{this.props.overview}</p>
           <button className="view-button" onClick = {this.handleViewMovie}>view</button>
         </div>
+        </div>}
       </div>
     );
   }
