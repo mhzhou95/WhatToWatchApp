@@ -4,7 +4,6 @@ export default class SearchBar extends React.Component{
   handleSearch = (event) => {
     event.preventDefault();
     const value = event.target.elements.title.value.trim();
-    console.log(value);
     if (value.length > 0 ){
     const title = this.props.handleSearch(value);
     }

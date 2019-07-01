@@ -3,6 +3,8 @@ import SearchBar from './SearchBar';
 import Movie from './Movie';
 import ShowList from './ShowList';
 import RandomShow from './Modal';
+import MovieGenres from './MovieGenres';
+import TvGenres from './TvGenres';
 import $ from 'jquery';
 
 const auth = require("../../auth");
@@ -11,14 +13,15 @@ class WhatToWatchApp extends React.Component {
   state = {
     movies: [],
     searchTitle: '',
-    discover: false,
     page: 1,
-    url: ''
+    url: '',
+    genre: 0,
+    genreSearchMovies: false,
+    genreSearchTv: false
   }
   handleDiscover = () => {
     this.setState(()=> ({
       movies: [],
-      discover:true,
       searchTitle: '',
       page: 1
     }))
@@ -37,7 +40,6 @@ class WhatToWatchApp extends React.Component {
   handleTrending = () => {
     this.setState(()=>({
       movies: [],
-      discover: false,
       searchTitle: '',
       page: 1
     }))
@@ -57,7 +59,6 @@ class WhatToWatchApp extends React.Component {
     this.setState(()=>({
       movies: [],
       searchTitle: title,
-      discover: true,
       page: 1
     }))
     $.ajax({
@@ -75,7 +76,6 @@ class WhatToWatchApp extends React.Component {
   handleNowPlaying = () => {
     this.setState(()=>({
       movies: [],
-      discover: false,
       searchTitle: '',
       page: 1
     }))
@@ -94,7 +94,6 @@ class WhatToWatchApp extends React.Component {
   handleTvPopular = () => {
     this.setState(()=>({
       movies: [],
-      discover: false,
       searchTitle: '',
       page: 1
     }))
@@ -113,7 +112,6 @@ class WhatToWatchApp extends React.Component {
   handleNextPage = () => {
     this.setState(()=>({
       movies: [],
-      discover: false,
       searchTitle: '',
       page: this.state.page += 1,
     }))
@@ -131,7 +129,6 @@ class WhatToWatchApp extends React.Component {
     if(this.state.page > 1) {
       this.setState(()=>({
         movies: [],
-        discover: false,
         searchTitle: '',
         page: this.state.page -= 1,
       }))
@@ -146,29 +143,97 @@ class WhatToWatchApp extends React.Component {
       })
     }
   }
+  handleHome = () => {
+    this.setState(()=>({
+      movies: [],
+      searchTitle: '',
+      genre: 0,
+      genreSearchMovies: false,
+      genreSearchTv: false
+    }))
+  }
+  handleGenreMovies = () => {
+    this.setState(()=>({
+      movies: [],
+      searchTitle: '',
+      page: 1,
+      genreSearchMovies: true
+    }))
+  }
+  handleGenreSearchMovies = (genreMovie) =>{
+    this.setState(()=> ({
+      movies:[],
+      page: 1,
+      genre: genreMovie
+    }))
+    $.ajax({
+      url: "https://api.themoviedb.org/3/discover/movie?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie
+      ,
+      success: (searchResults) => {
+        const results = searchResults.results
+        this.setState(()=>({
+          movies: this.state.movies.concat(results),
+          url: "https://api.themoviedb.org/3/discover/movie?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreMovie + "&page=" 
+        }))
+      }
+    })
+  }
+  handleGenreTv = () => {
+    this.setState(()=> ({
+      movies: [],
+      searchTitle: '',
+      page: 1,
+      genreSearchTv: true
+    }))
+  }
+  handleGenreSearchTv = (genreTv) =>{
+    this.setState(()=> ({
+      movies:[],
+      page: 1,
+      genre: genreTv
+    }))
+    $.ajax({
+      url: "https://api.themoviedb.org/3/discover/tv?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv
+      ,
+      success: (searchResults) => {
+        const results = searchResults.results
+        this.setState(()=>({
+          movies: this.state.movies.concat(results),
+          url: "https://api.themoviedb.org/3/discover/tv?api_key="+ auth.TMDB_API_KEY + "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&vote_average.gte=1&with_genres=" + genreTv + "&page=" 
+        }))
+      }
+    })
+  }
   render=() => {
     return (
       <div className="wrapper-div">
       <img className="logo "src="/images/logo.png" />
         <div className="dashboard">
-          <SearchBar handleSearch = {this.handleSearch}/>
-          <button className="button-default" onClick= {this.handleDiscover}>Discover</button>
-          <button className="button-default" onClick={this.handleTrending}>Trending</button>
-          <button className="button-default" onClick={this.handleNowPlaying}>Upcoming Movies</button>
-          <button className="button-default" onClick = {this.handleTvPopular}>Popular TV Series</button>
+          {(!this.state.genreSearchMovies && !this.state.genreSearchTv) && 
+            <div>
+              <SearchBar handleSearch = {this.handleSearch}/>
+              <button className="button-default" onClick= {this.handleDiscover}>Discover</button>
+              <button className="button-default" onClick={this.handleTrending}>Trending</button>
+              <button className="button-default" onClick={this.handleNowPlaying}>Upcoming Movies</button>
+              <button className="button-default" onClick = {this.handleTvPopular}>Popular TV Series</button>
+              <button className="button-default" onClick = {this.handleGenreMovies}>Movie Genres</button>
+              <button className="button-default" onClick = {this.handleGenreTv}>Tv Genres</button>
+            </div>}
+            {this.state.genreSearchMovies && <MovieGenres handleGenreSearchMovies = {this.handleGenreSearchMovies }/>}
+            {this.state.genreSearchTv && <TvGenres handleGenreSearchTv = {this.handleGenreSearchTv }/>}
           <div>
-            {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleLastPage}>LastPage</button>}
-            {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleNextPage}>NextPage</button>}
+            {this.state.genre > 0 && <button className="button-change-page" onClick= {this.handleHome}>Home</button>}
+            {this.state.movies.length > 0 && <button className="button-change-page" onClick = {this.handleLastPage}>LastPage</button>}
+            {this.state.movies.length > 0 && <button className="button-change-page" onClick = {this.handleNextPage}>NextPage</button>}
           </div>
           {this.state.movies.length>0 && <RandomShow options={this.state.movies}/>}
         </div>
         <ShowList movieList = {this.state.movies}/>
-        {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleLastPage}>LastPage</button>}
-        {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleNextPage}>NextPage</button>}
+        {this.state.movies.length > 1 && <button className="button-change-page" onClick = {this.handleLastPage}>LastPage</button>}
+        {this.state.movies.length > 1 && <button className="button-change-page" onClick = {this.handleNextPage}>NextPage</button>}
       </div>
     );
   }
 }
-
 
 export default WhatToWatchApp;
