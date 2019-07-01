@@ -7,6 +7,7 @@ const ShowList = (props) => (
       return(
         <Movie 
           key={movie.id}
+          id = {movie.id}
           title={movie.title}
           name={movie.name}
           posterPath={movie.poster_path}

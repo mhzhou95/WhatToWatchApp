@@ -165,16 +165,20 @@ class WhatToWatchApp extends React.Component {
       <div className="wrapper-div">
       <img className="logo "src="/images/logo.png" />
         <div className="dashboard">
+          <SearchBar handleSearch = {this.handleSearch}/>
           <button className="button-default" onClick= {this.handleDiscover}>Discover</button>
           <button className="button-default" onClick={this.handleTrending}>Trending</button>
           <button className="button-default" onClick={this.handleNowPlaying}>Upcoming Movies</button>
           <button className="button-default" onClick = {this.handleTvPopular}>Popular TV Series</button>
-          <SearchBar handleSearch = {this.handleSearch}/>
-          {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleLastPage}>LastPage</button>}
-          {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleNextPage}>NextPage</button>}
+          <div>
+            {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleLastPage}>LastPage</button>}
+            {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleNextPage}>NextPage</button>}
+          </div>
           {this.state.movies.length>0 && <RandomShow options={this.state.movies}/>}
         </div>
         <ShowList movieList = {this.state.movies}/>
+        {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleLastPage}>LastPage</button>}
+        {this.state.movies.length > 1 && <button className="button-default" onClick = {this.handleNextPage}>NextPage</button>}
       </div>
     );
   }

@@ -37,6 +37,7 @@ class RandomShow extends React.Component{
         >
           <Movie 
             key={this.state.movie.id}
+            id={this.state.movie.id}
             title={this.state.movie.title}
             name={this.state.movie.name}
             posterPath={this.state.movie.poster_path}
