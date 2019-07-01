@@ -13,7 +13,7 @@ class Movie extends React.Component{
   }
   render = () =>{
     return (
-      <div>
+      <div className="movieWrapper">
       {this.props.voteAverage>0 && 
         <div className="movie">
         <img src= {"http://image.tmdb.org/t/p/w185/" + this.props.posterPath} alt="Poster" className="poster"/>

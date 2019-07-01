@@ -7,7 +7,9 @@
   color: #DE94AF;
   background-color: #4A001B;
 }
-
+.movieWrapper{
+  display: inline-table;
+}
 .title{
   font-weight: bold;
   margin: $small-size;
