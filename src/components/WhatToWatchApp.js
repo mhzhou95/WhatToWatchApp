@@ -79,13 +79,13 @@ class WhatToWatchApp extends React.Component {
       page: 1
     }))
     $.ajax({
-      url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + process.env.TMDB_API_KEY  + "&"
+      url: "https://api.themoviedb.org/3/movie/now_playing?api_key=" + process.env.TMDB_API_KEY  + "&"
       ,
       success: (searchResults) => {
         const results = searchResults.results
         this.setState(()=>({
           movies: this.state.movies.concat(results),
-          url: "https://api.themoviedb.org/3/movie/upcoming?api_key=" + process.env.TMDB_API_KEY  + "&page=" 
+          url: "https://api.themoviedb.org/3/movie/now_playing?api_key=" + process.env.TMDB_API_KEY  + "&page=" 
         }))
       }
     })
@@ -213,7 +213,7 @@ class WhatToWatchApp extends React.Component {
               <SearchBar handleSearch = {this.handleSearch}/>
               <button className="button-default" onClick= {this.handleDiscover}>Discover</button>
               <button className="button-default" onClick={this.handleTrending}>Trending</button>
-              <button className="button-default" onClick={this.handleNowPlaying}>Upcoming Movies</button>
+              <button className="button-default" onClick={this.handleNowPlaying}>Movies Now Playing</button>
               <button className="button-default" onClick = {this.handleTvPopular}>Popular TV Series</button>
               <button className="button-default" onClick = {this.handleGenreMovies}>Movie Genres</button>
               <button className="button-default" onClick = {this.handleGenreTv}>Tv Genres</button>
