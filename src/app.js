@@ -9,4 +9,5 @@ setInterval(() => {
   http.get('http://what-do-mz.herokuapp.com');
 }, 300000);
 
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 ReactDOM.render(<WhatToWatchApp />, document.getElementById('app'));
